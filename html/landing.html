@@ -1,0 +1,29 @@
+<header>
+    <h2 class="heading">Fab Hotels</h2>
+</header>
+<div id="mainDiv" ng-controller="MainCtrl as $ctrl">
+    <div class="row">
+
+        <div class="overlay">
+            <form name="newHotelForm" ng-submit="">
+                <input id="searchInput" type="text" autofocus="autofocus" onblur="this.focus()" ng-change="getHotels(newHotel.name);getGoogleSuggestions(newHotel.name);" ng-model-options="{debounce:200}" ng-model="newHotel.name" placeholder="Search hotels in your city!">
+            </form>
+            <div ng-if="googleSuggests.length || Hotels.length" class="right-panel">
+                <ul id="results1" ng-if="googleSuggests.length">
+                    <li><h4>Locations</h4></li>
+                    <li ng-repeat="pre in googleSuggests"><i class="fa fa-map-marker" aria-hidden="true"></i> {{pre.description}}</li>
+                </ul>
+                <ul id="results" ng-if="hotels.length">
+                    <li><h4>Hotels</h4></li>
+                    <li ng-repeat="hotel in hotels"><i class="fa fa-building-o" aria-hidden="true"></i> {{hotel.name}}</li>
+                </ul>
+            </div>
+            <div ng-if="error" class="right-panel">
+                <ul>
+                    <li class="noResults" ng-show="error">No results found!</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
